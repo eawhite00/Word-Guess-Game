@@ -55,7 +55,7 @@ Having an active and healthy commit history on GitHub is important for your futu
 7. Note: There's no shame if you'd prefer submitting Psychic—it's still a proper challenge.
 
 8. Push your selected game to Github Pages.
-
+     
 
 <!-- ## Option One: Psychic Game (Basic)
 
