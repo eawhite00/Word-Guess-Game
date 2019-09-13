@@ -1,7 +1,9 @@
-
 //=========================Variables=========================
+
+//For testing I only included four different words
 const wordChoices = ["tabby", "persian", "calico", "meow"];
-const maxGuesses = 6;
+const maxGuesses = 10; //set as a const here to easily modify / test
+const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 var gameStarted = false;
 var resetGame = true;
@@ -54,6 +56,7 @@ function setupDisplay(){
         displayWord.push("_ ");
     }
 
+    //setting length to zero rests if this isn't the first round
     guessedLetters.length = 0;
     guessedLettersText.textContent = guessedLetters;
 }
@@ -71,6 +74,17 @@ function checkIfGuessed(guess){
     return guessedYet;
 }
 
+//This functions checks to see if the input was a letter
+function checkLetter(guess){
+    for (i = 0; i < alphabet.length; i++){
+        if (guess === alphabet[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+//This handles a letter this first time it's guessed
 function newGuess(guess){
     guessedLetters.push(guess);
     guessedLettersText.textContent = guessedLetters;
@@ -78,6 +92,7 @@ function newGuess(guess){
     numGuessesText.textContent = numGuesses;
 }
 
+//This checks to see if the guessed letter is in the target word
 function evaluateGuess(guess){
     for (i = 0; i < theWord.length; i++){
         if (guess === theWord[i]){
@@ -87,6 +102,7 @@ function evaluateGuess(guess){
     currentWordText.textContent = displayWord.join("");
 }
 
+//This checks to see if the player has won
 function checkForWin(){
     for (i = 0; i < displayWord.length; i++){
         if (displayWord[i] === "_ "){
@@ -96,17 +112,19 @@ function checkForWin(){
     return true;
 }
 
+//this handles the behavior of a win
 function win(){
     numWins++;
     numWinsText.textContent = numWins;
-    gameStatusText.textContent = "You won! Congratulations!";
+    gameStatusText.textContent = "You won! Congratulations! Hit a key to play again.";
     resetGame = true;
 }
 
+//this handles the behavior of a loss
 function lose(){
     numLosses++;
     numLossesText.textContent = numLosses;
-    gameStatusText.textContent = "Sorry you lost! The word was " + theWord.join("");
+    gameStatusText.textContent = "Sorry, you lost! The word was " + theWord.join("") +". Hit a key to play again!";
     resetGame = true;
 }
 
@@ -122,17 +140,17 @@ document.onkeyup = function(event){
     }
     else {
 
-        //setting all guesses to lower case to avoid conflicts
+        //Here we set all guesses to lower case to avoid conflicts
         var userGuess = event.key.toLocaleLowerCase();
 
-        if (checkIfGuessed(userGuess) === false){
+        if (checkIfGuessed(userGuess) === false && checkLetter(userGuess) === true){
             newGuess(userGuess);
             evaluateGuess(userGuess);
 
             if(checkForWin()){
                 win();
             }
-            if (numGuesses === 0){
+            else if (numGuesses === 0){
                 lose();
             }
 

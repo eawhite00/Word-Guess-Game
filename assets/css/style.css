@@ -1,3 +1,38 @@
+
+body{
+    background-color: rgb(223, 195, 135);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#banner{
+    width: 100%;
+    font-size: 36pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 #gameContent{
+    float: left;
     display: none;
+    width: 33%;
+    text-align: center;
+}
+
+#getStarted{
+    font-size: 20pt;
+    margin: 10px;
+}
+
+#gameStatus{
+    font-size:20pt;
+    margin: 10px;
+}
+
+p {
+    margin: 10px;
+}
+
+img{
+    float: left;
+    width: 33%;
 }
